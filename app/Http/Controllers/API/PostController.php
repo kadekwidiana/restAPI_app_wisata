@@ -126,7 +126,7 @@ class PostController extends Controller
             'id_user' => 'required',
             'id_category' => 'required',
             'title' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'location' => 'required',
             'rating' => 'required',
             'description' => 'required'

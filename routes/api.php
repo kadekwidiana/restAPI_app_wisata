@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AUTH\LoginController;
 use App\Http\Controllers\API\AUTH\RegisterController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\UserController;
 // use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,8 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('register', [RegisterController::class, 'register']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    // user
+    Route::get('/user', [UserController::class, 'index']);
     // Post
     Route::apiResource('posts', PostController::class);
     Route::post('/posts/{id}', [PostController::class, 'update']);
