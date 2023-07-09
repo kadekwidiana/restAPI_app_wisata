@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\Catch_;
 
 class CategoryController extends Controller
@@ -40,10 +41,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'category_name' => 'required'
+            'category_name' => 'required',
+            'image' => 'required'
         ]);
 
         try {
+            if ($request->file('image')) {
+                $validatedData['image'] = $request->file('image')->store('category-image');
+            }
+
             $category = Category::create($validatedData);
             if ($category != null) {
                 return response()->json([
@@ -127,6 +133,15 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
 
+            if ($request->hasFile('image')) {
+                // Hapus gambar lama jika ada
+                if ($category->image) {
+                    Storage::delete($category->image);
+                }
+                // Simpan gambar baru
+                $validatedData['image'] = $request->file('image')->store('category-image');
+            }
+
             $category->update($validatedData);
             return response()->json([
                 'success' => true,
@@ -158,6 +173,10 @@ class CategoryController extends Controller
                 return response()->json([
                     'message' => 'Category ini memiliki beberapa data post'
                 ]);
+            }
+
+            if ($category->image) {
+                Storage::delete($category->image);
             }
 
             $category->delete();

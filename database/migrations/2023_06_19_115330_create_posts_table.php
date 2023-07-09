@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('title');
             // $table->string('category');
             $table->string('image');
-            $table->string('location');
-            $table->string('rating');
             $table->string('description');
+            $table->string('name_location');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }

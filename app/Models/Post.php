@@ -15,8 +15,9 @@ class Post extends Model
         'id_category',
         'title',
         'image',
-        'location',
-        'rating',
+        'latitude',
+        'longitude',
+        'name_location',
         'description',
     ];
 

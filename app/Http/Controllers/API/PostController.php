@@ -46,8 +46,9 @@ class PostController extends Controller
             'id_category' => 'required',
             'title' => 'required',
             'image' => 'required',
-            'location' => 'required',
-            'rating' => 'required',
+            'name_location' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'description' => 'required'
         ]);
 
@@ -127,8 +128,9 @@ class PostController extends Controller
             'id_category' => 'required',
             'title' => 'required',
             // 'image' => 'required',
-            'location' => 'required',
-            'rating' => 'required',
+            'name_location' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'description' => 'required'
         ]);
 
